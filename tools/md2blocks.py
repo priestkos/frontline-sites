@@ -81,6 +81,13 @@ def split_row(line: str):
 
 def parse(text: str):
     lines = text.split("\n")
+    # A leading YAML frontmatter block is machine metadata on the source skill
+    # files, not reference content: skip it rather than rendering it as prose.
+    if lines and lines[0].strip() == "---":
+        for j in range(1, len(lines)):
+            if lines[j].strip() == "---":
+                lines = lines[j + 1:]
+                break
     blocks, i, n = [], 0, len(lines)
     stats = {"heading": 0, "table": 0, "tablerow": 0, "bullet": 0, "code": 0, "quote": 0, "para": 0}
     pending_list = None
