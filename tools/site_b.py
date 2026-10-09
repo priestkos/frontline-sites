@@ -11,7 +11,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 
 # ----------------------------------------------------------------- facts used
 THRESH = [("Onsal Hakair", 1400, "Danshig Naadam"), ("Worqor Chirteh", 1400, "Triumph"),
-          ("Fields of Glory", 1600, "Shatter"), ("Seal Rock", 2000, "Seize"),
+          ("Fields of Glory", 1600, "Shatter"), ("Seal Rock", 700, "Seize"),
           ("Borderland Ruins", 2400, "Secure")]
 NODE_TICK = [2, 4, 6, 10, 12, 14, 18, 20, 22]
 OVOO_DECAY = [(30, 200), (20, 120), (15, 100), (10, 60), (6, 40)]
@@ -30,7 +30,7 @@ LEVERS = [
 
 MAPS = [
     ("Borderland Ruins", "Secure", "2,400", "Nine key locations and the centre Allagan weaponry. Four nodes is the income breakpoint; the value per three seconds climbs from two at one node to twenty-two at nine. Farm the Nodes for a hundred and fifty, and never fight on the teleport pad edges."),
-    ("Seal Rock", "Seize", "2,000 data", "Allagan tomeliths, and they can be stolen. Win the fight at the tomelith, then channel: any hit interrupts. A knockout both adds your data and subtracts theirs."),
+    ("Seal Rock", "Seize", "700 data", "Four tomeliths activate 30 seconds in, then activation follows extraction: a drained one is replaced about 15 seconds later. Each pays for about two minutes. Win the fight at the tomelith, then channel, because any hit interrupts."),
     ("Fields of Glory", "Shatter", "1,600 data", "Damage to icebound tomeliths is the score, so Battle High is literally currency here. Small ice caps at fifty, large at two hundred, split by damage share. Small ice always activates at 12:30 and 4:30 remaining."),
     ("Onsal Hakair", "Danshig Naadam", "1,400", "Ovoos cannot be stolen, only interrupted. It is a race, not a defence. Claim what you can complete, and break the claim the leader needs with a single ranged hit."),
     ("Worqor Chirteh", "Triumph", "1,400", "Every field around a triumph must be held, one player each, and any enemy inside blocks the capture. Snow arrives at about 16:00, auroras at about 9:00, and auroras raise both the ranks and everybody's Limit Break."),
@@ -290,6 +290,8 @@ footer{border-top:1px solid var(--line);padding:40px 0 64px;color:var(--faint);
 .rise{opacity:1;transform:none}
 html.mo .rise{opacity:0;transform:translateY(18px)}
 html.mo .rise.in{opacity:1;transform:none;transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.2,1)}
+.tl{stroke:var(--line);stroke-width:1.5}
+.tl-cap{font-family:var(--mono);font-size:10px;fill:var(--faint)}
 @media(prefers-reduced-motion:reduce){
   html.mo .rise{opacity:1;transform:none}
   .in .bf{animation:none;width:var(--w)} .in .ln.draw{animation:none;stroke-dashoffset:0}
@@ -401,6 +403,38 @@ PLAYS_HTML = "".join(
     f'<h3>{n}</h3><p>{d}</p></button>' for i, (n, d) in enumerate(PLAYS))
 ORDERS_HTML = "".join(f"<span>{o}</span>" for o in ORDERS)
 
+def timeline():
+    """Both maps' activation clocks, drawn on the match countdown."""
+    w, h, pad, top, lane = 660, 176, 66, 26, 74
+
+    def x_of(elapsed):
+        return pad + (elapsed / 20.0) * (w - 2 * pad)
+
+    lanes = [
+        ("Shatter", "#c6f24e", [(0.0, "20:00"), (0.333, "19:40"), (7.5, "12:30"), (15.5, "4:30")],
+         "Forecast icon 30 s before every activation. Destroyed large ice is back in 60 s; small ice is gone 6 minutes."),
+        ("Seize", "#e9edf0", [(0.5, "19:30")],
+         "Four tomeliths activate at 0:30. Each pays for about two minutes, then a new one activates roughly 15 s later."),
+    ]
+    o = [f'<svg class="cs" viewBox="0 0 {w} {h}" role="img" aria-label="objective activation timeline">']
+    for step in range(5):
+        el = step * 5
+        x = x_of(el)
+        o.append(f'<line x1="{x:.1f}" y1="{top - 14}" x2="{x:.1f}" y2="{h - 34}" class="g"/>')
+        o.append(f'<text x="{x:.1f}" y="{h - 14}" class="ax">{20 - el}:00</text>')
+    for i, (name, colour, events, caption) in enumerate(lanes):
+        y = top + lane * i
+        o.append(f'<text x="{pad - 12}" y="{y + 4}" class="ax" style="text-anchor:end;fill:{colour}">{name.upper()}</text>')
+        o.append(f'<line x1="{pad}" y1="{y}" x2="{w - pad}" y2="{y}" class="tl"/>')
+        for elapsed, clock in events:
+            cx = x_of(elapsed)
+            o.append(f'<path d="M{cx:.1f},{y - 6:.1f} l6,6 l-6,6 l-6,-6 z" style="fill:{colour}"/>')
+            o.append(f'<text x="{cx:.1f}" y="{y - 15}" class="ax" style="fill:{colour}">{clock}</text>')
+        o.append(f'<text x="{pad}" y="{y + 34}" class="tl-cap">{caption}</text>')
+    o.append("</svg>")
+    return "".join(o)
+
+
 CHART_TABS = [
     ("t", "Win thresholds", f'<div class="bars">{bars()}</div>',
      "Every campaign is a threshold, never a kill count. The number on the left is the objective."),
@@ -414,6 +448,8 @@ CHART_TABS = [
      "Aimed fire scales combat power with the square of numbers. Double the side and you quadruple the power."),
     ("h", "Job by map affinity", heatmap(),
      "Twenty-one jobs against five maps. Bright cells are where the job is worth playing."),
+    ("k", "Objective activation clocks", timeline(),
+     "When the objectives actually turn on, read against the match clock: Seize's scripted opening and its two-minute cadence, and Shatter's thirty-second forecast before every ice."),
 ]
 TABS_HTML = "".join(
     f'<button class="tab" role="tab" aria-selected="{"true" if i == 0 else "false"}" '

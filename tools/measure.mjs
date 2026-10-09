@@ -1,15 +1,43 @@
 // Measures each page in headless Chrome over CDP. No dependencies: Node's global
 // WebSocket plus the DevTools HTTP endpoint.
 import { spawn } from 'node:child_process';
-import { mkdtempSync } from 'node:fs';
+import {existsSync, mkdtempSync, readdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
-const CHROME = process.env.CHROME_BIN || [
-  '/usr/bin/google-chrome', '/usr/bin/chromium',
-  'C:/Program Files/Google/Chrome/Application/chrome.exe',
-  'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
-].find((p) => { try { return require('node:fs').existsSync(p); } catch { return false; } }) || 'google-chrome';
+function findChrome() {
+  const direct = [
+    process.env.CHROME_BIN,
+    '/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser',
+    'C:/Program Files/Google/Chrome/Application/chrome.exe',
+    'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
+    'C:/Program Files/Microsoft/Edge/Application/msedge.exe',
+    'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
+  ].filter(Boolean);
+  for (const c of direct) if (existsSync(c)) return c;
+  // Browser download caches (puppeteer / playwright), found without hardcoding a home path.
+  const roots = [
+    process.env.USERPROFILE && join(process.env.USERPROFILE, '.cache', 'puppeteer', 'chrome'),
+    process.env.HOME && join(process.env.HOME, '.cache', 'puppeteer', 'chrome'),
+    process.env.LOCALAPPDATA && join(process.env.LOCALAPPDATA, 'ms-playwright'),
+  ].filter(Boolean);
+  const subs = [
+    'chrome-win64/chrome.exe', 'chrome-win32/chrome.exe',
+    'chrome-linux64/chrome', 'chrome-linux/chrome',
+    'chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
+  ];
+  for (const root of roots) {
+    if (!existsSync(root)) continue;
+    for (const entry of readdirSync(root)) {
+      for (const sub of subs) {
+        const p = join(root, entry, sub);
+        if (existsSync(p)) return p;
+      }
+    }
+  }
+  return 'google-chrome';
+}
+const CHROME = findChrome();
 const PORT = 9333;
 const urls = process.argv.slice(2);
 

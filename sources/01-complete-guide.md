@@ -266,17 +266,28 @@ Other patch 7.2/7.25 notes: terrain adjusted, key location distribution adjusted
 
 *Added patch 3.05 (Heavensward).*
 
-**Victory:** accumulate the required amount of **Data** — **2,000** following the patch 6.4 increase from 1,600 (the wiki no longer publishes a figure, so verify on the HUD) — or hold the most Data at expiry. Rewards are ranked by Data collected.
+**Victory:** accumulate the required amount of **Data** — **700** in the 72-player campaign, following the patch 6.4 **reduction** from 800 (the wiki no longer publishes a figure, so confirm on the HUD) — or hold the most Data at expiry. Rewards are ranked by Data collected.
 
 **Data comes from two sources:** occupying Allagan Tomeliths, and defeating enemy players (which both adds to your total and subtracts from theirs).
 
-**Allagan Tomeliths.**
-- All are **inactive at the start** and activate randomly at set intervals.
+**Allagan Tomeliths — when they activate.**
+- All are **inactive at the start**. The map holds roughly **16 tomeliths** and they activate at set intervals.
+- **The opening is scripted: four tomeliths activate 30 seconds after the match begins.** After that, activation follows *extraction*, not the clock.
 - **Spawn points are fixed; the order is random.**
-- Each has a limited quantity of data; it deactivates once that quantity is extracted.
-- The maximum number simultaneously active changes over the course of the campaign.
+- Each holds a limited quantity of data and **deactivates when it is drained**. It pays for as long as it holds data, so somebody has to stay on it.
+- **A drained tomelith is replaced about 15 seconds later** by another one activating somewhere else. Watch the map, not the spot you were standing on.
+- **Full extraction takes about two minutes**, and the total is fixed by rank:
+
+  | Rank | Rate while occupied | Total, held from activation to empty |
+  |---|---|---|
+  | **B** (triangle) | 2 data per 3 s | **80** |
+  | **A** (square) | 3 data per 3 s | **120** |
+  | **S** (pentagon) | 4 data per 3 s | **160** |
+
+  A rank is therefore a **duration** as much as a value: a B is only worth taking if you can hold it for most of two minutes.
+- **The map thins out and gets richer.** The maximum number active at once changes over the campaign: it opens at **four**, and as the match runs the number that spawn **decreases** while the rank that spawns **rises**. Expect a wide, cheap, B-heavy opening and a narrow, expensive, A-and-S endgame.
 - Tomeliths activate at one of three ranks — **B, A, S** — higher ranks are rarer but hold more data. As the match progresses, higher ranks become more likely.
-- **They can be stolen.** Occupying is a long channel that is **interrupted by any hit**, and an enemy team can claim it after your team has activated it.
+- **They can be stolen.** Occupying is a long channel that is **interrupted by any hit**, and an enemy team can claim it after your team has activated it. The ongoing ticks are what pay, so steal back for the denial rather than for any bonus on the claim itself.
 
 The team's Data total is shown on the dedicated scoring banner.
 
@@ -284,18 +295,38 @@ The team's Data total is shown on the dedicated scoring banner.
 
 *Added patch 3.3 (Heavensward).*
 
-**Victory:** collect **1,600 Data**, or hold the most at expiry. Simultaneous 1,600 = draw.
+**Victory:** collect **1,600 Data**, or hold the most at expiry. Simultaneous 1,600 = draw. *(Raised 1,600 → 2,000 in patch 6.4, then lowered back to 1,600 in patch 6.57.)*
 
 **Data comes from two sources:**
 - **Destroying Icebound Tomeliths:** **+1 to ~200** depending on the size of the tomelith and the damage you inflicted. Rewards cap at **50 for a small tomelith** and **200 for a large tomelith**.
 - **Defeating enemy players: +8 data.**
 
-**Icebound Tomeliths ("ice").**
-- Small ice has **300,000 HP**; large ice has **3,000,000 HP**.
-- Ice can only be damaged once **active**. About 30 seconds in, **two large ice** activate.
-- Destroyed ice **reactivates after a fixed period**.
-- Ice about to activate has an **outline around its map icon**.
-- As time passes more ice activates; the order differs every match. In general there are always **two large ice primed to activate**. **Small ice always activates at 12:30 and 4:30 remaining on the timer.** By the end of the campaign, every tomelith will have activated at least once.
+**Icebound Tomeliths ("ice") — when they activate.**
+- Small ice has **300,000 HP**; large ice has **3,000,000 HP**. Data: small caps at **50**, large at **200**.
+- **Ice is only damageable while active.** Every tomelith on the map is inactive at the start, and the order in which they activate differs every match.
+- **You always get 30 seconds of warning.** An activation-forecast icon appears on the 2D map **30 seconds before** an ice becomes active, and the tomelith lights up where it stands. That warning is the whole map: it is how you arrive before the other two companies instead of after them.
+- **The four map states, in order.** Read these off the map and you always know what is about to happen:
+
+  | State | What you see | Meaning |
+  |---|---|---|
+  | **Gone** | not on the map | destroyed, awaiting respawn |
+  | **Black** | on the map, dark | respawned but **not yet damageable** |
+  | **Outlined** | outlined icon | the **30-second warning**; about to activate |
+  | **Blue** | lit | **active and damageable** |
+- **The opening.** The first forecast shows as the match starts and the first ice becomes damageable roughly **15 to 30 seconds in**, with **two large ice** activating together. In general there are always **two large ice primed to activate** and a maximum of **two large ice active at once**.
+- **Small ice activates in waves.** The two wave times you can plan around are **12:30 and 4:30 remaining** on the timer. These are community-observed rather than an official figure, and they do not reconcile exactly with the official timers below, so trust the map outline over the clock.
+- **The official timers (patch 6.55, unchanged since):**
+
+  | Thing | Value |
+  |---|---|
+  | Time before the **first small ice** activates | **420 seconds** (7 minutes) |
+  | Time for **small ice to reactivate** | **420 seconds** |
+  | Time for destroyed **small ice to reappear** | **360 seconds** (6 minutes) |
+  | Time for destroyed **large ice to respawn** | **60 seconds** |
+  | **Small ice active at once** (maximum) | **15** |
+  | **Large ice active at once** (maximum) | **2** |
+- **Large ice comes back in a minute; small ice does not.** Large ice respawns in **60 seconds**, so the contest over it never really ends. Small ice is gone for **six minutes**, so a small ice your company takes is one the others cannot answer for a long time. That asymmetry should decide late target choice.
+- **By the end of the campaign every tomelith on the map will have activated at least once.**
 - **Battle High is critical here.** Faster kills of ice = faster score. A successful Grand Company places equal or greater importance on Battle High than on anything else.
 
 **Positioning and plays.**
@@ -774,7 +805,7 @@ Each of these is a *named* violation. Calling them out in chat actually corrects
 
 **Map rules:** 72 players · 20 minutes · 24 per team · premade max 4 · random Grand Company · 10s Invincibility on leaving the landing platform · any hit dismounts you and applies uncleansable Hoofing It.
 
-**Thresholds:** Secure 2,400 (node breakpoint at **4**) · Seize 2,000 data (raised from 1,600 in 6.4 — verify on the HUD) · Shatter 1,600 data (KO = 8; small ice caps 50, large 200) · **Onsal 1,400** · Triumph 1,400.
+**Thresholds:** Secure 2,400 (node breakpoint at **4**) · Seize 700 data (lowered from 800 in 6.4 — verify on the HUD) · Shatter 1,600 data (KO = 8; small ice caps 50, large 200) · **Onsal 1,400** · Triumph 1,400.
 
 **Ovoo payout (Onsal):** B 50 · A 100 · S 200, paid at **5 / 10 / 20 per 3 seconds over 30 seconds** — a claim is worth `rate × time left`, capped at the rank total. KO +8 · death −8 (flat; a 16-point swing).
 
@@ -804,7 +835,12 @@ Each of these is a *named* violation. Calling them out in chat actually corrects
 - [Patch 7.2 notes (Secure rework, role actions)](https://na.finalfantasyxiv.com/lodestone/topics/detail/3c4910f373e497acd3428c37f6358e341e4cc06d/)
 - [Patch 7.4 notes (Triumph added)](https://na.finalfantasyxiv.com/lodestone/topics/detail/06944d892fd98cc00b2a28ff77edbafa4f7eef54/)
 - [Patch 5.18 notes — Naadam rating 1,800 → 1,600, KO/death value 10 → 8 (JP Lodestone)](https://jp.finalfantasyxiv.com/lodestone/topics/detail/f586b313e4f6c76c0cc18d99fc15c6058bb0f5ee)
-- [Patch 6.4 notes — Naadam rating 1,600 → 1,400; campaign data 1,600 → 2,000](https://www.ign.com/wikis/ffxiv/FFXIV_6.4_The_Dark_Throne_Patch_Notes_and_Release_Date)
+- [Patch 6.4 notes — Naadam rating 1,600 → 1,400; **Seize data 800 → 700**; Shatter data 1,600 → 2,000 with Allagan tomeliths removed from Shatter](https://www.ign.com/wikis/ffxiv/FFXIV_6.4_The_Dark_Throne_Patch_Notes_and_Release_Date)
+- [Patch 6.55 notes — Shatter ice timers: first small ice 420 s, reactivation 420 s, destroyed small reappears 360 s, destroyed large respawns 60 s, 15 small and 2 large active at once; max HP 300,000 / 3,000,000](https://na.finalfantasyxiv.com/lodestone/topics/detail/012d8e96b662a92eb4405c25b9958184db248348)
+- [Shatter patch history including 6.57 (Shatter data back to 1,600, KO 5 → 8) and the 6.4 rework — FF14 Online Wiki](https://ff14wiki.info/?%E3%83%95%E3%82%A3%E3%83%BC%E3%83%AB%E3%83%89%E3%83%BB%E3%82%AA%E3%83%96%E3%83%BB%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%AA%E3%83%BC)
+- [Seize tomelith cadence: four activate 30 s after the start, each lasting a random 2 to 3 minutes — 攻略:ark](https://ff14a.net/pvp-seal-rock.php)
+- [Seize 6.5 rules: 700 to win, a drained tomelith replaced after about 15 s, spawn count falls and rank rises as the match runs — うわさの調べ](https://uwasablog.com/game230406/)
+- [Seal Rock (Seize) strategy, incl. the 600-plus endgame — FFXIV Online Wiki](https://consolegameswiki.com/wiki/Seal_Rock_(Seize)_Strategy)
 - [うわさの調べ — フロントラインの各ルール簡易解説【6.5】](https://uwasablog.com/game230406/) (ovoo tick rates, 30-second payout, no re-claiming)
 - [ララのおもちゃ箱 — オンサルハカイルの基礎](https://lala-toybox.com/pvp/flontline/onsal/) (rank payout table)
 - [INUISM — 【FL】オンサル・ハカイル(終節戦)](https://inuism.com/ff14_fl_onsalhakair) (score sources, KO ±8)

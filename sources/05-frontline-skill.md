@@ -1,7 +1,7 @@
 ---
 name: ffxiv-frontline
 description: Use when asked FFXIV Frontline PvP strategy or mechanics.
-version: 1.0.0
+version: 1.1.0
 author: DalamudTranslator
 license: MIT
 metadata:
@@ -19,8 +19,8 @@ Scope: the 24v24v24 Grand Company battleground — strategy, map playbooks, mech
 **Live tool:** `FrontlineAdvisor` (`D:\XIVPlugins Self\FrontlineAdvisor`) is a Dalamud plugin built on this doctrine — it reads the game's own Frontline score board and calls the leader, the focus target (the imminent winner), the emerging threat (fastest scorer) and every lead change. Its advice strings ARE this guide's doctrine; keep them in step when the doctrine changes.
 
 **Canonical artifacts:** the full unabridged write-up lives in the shared vault at
-`sources/` — `ffxiv-frontline-complete-guide.md` (mechanics, the five maps, doctrine, the 14 plays), `ffxiv-frontline-jobs.md` (roles, role actions, the kill chain, 21 job profiles, map affinity), `ffxiv-frontline-macros.md` and `ffxiv-frontline-call-sheet.md`.
-Reproduce from those files rather than re-researching; they are the shareable versions with every table and citation. **This repository is the reference copy.**
+`C:/ObsidianVaults/Notebook/Agents/ffxiv/guides/` — `ffxiv-frontline-complete-guide.md` (mechanics, the five maps, doctrine, the 14 plays), `ffxiv-frontline-jobs.md` (roles, role actions, the kill chain, 21 job profiles, map affinity), `ffxiv-frontline-macros.md` and `ffxiv-frontline-call-sheet.md`.
+Reproduce from those files rather than re-researching; they are the shareable versions with every table and citation. **The vault is canonical**, and the user also keeps a flat reading copy at `D:/FFXIV Frontline/` with its own README index — that copy is a **snapshot taken at export time**, so refresh it when a guide changes, and describe it as a snapshot rather than implying it tracks.
 
 ## When to Use
 
@@ -87,8 +87,8 @@ Community picks per job: tanks **Rampage** (Rampart on DRK/GNB) · melee **Smite
 | Map | Target | Key numbers |
 |---|---|---|
 | Secure | 2,400 rating | 9 nodes; **4 nodes = the income breakpoint**; Nodes +150, α drones +30, Command Systems +24, drones +10, KO +10, death −10 |
-| Seize | **2,000 Data** (raised from 1,600 in 6.4) | Tomeliths **stealable**; channel interrupted by any hit; ranks B/A/S; the wiki no longer publishes per-rank values |
-| Shatter | 1,600 Data | KO = +8 data; small ice caps 50 (300k HP), large caps 200 (3M HP); **small ice always at 12:30 and 4:30** |
+| Seize | **700 Data** (lowered from 800 in 6.4) | **Four tomeliths activate 30 seconds in**, then activation follows extraction (**a drained one is replaced about 15 s later**); full extraction takes ~2 min and B/A/S pay **80/120/160**; the map thins out and rank rises as the match runs; **stealable**, channel interrupted by any hit |
+| Shatter | 1,600 Data (6.4 raised it to 2,000; 6.57 put it back) | KO = +8 data; small ice caps 50 (300k HP), large caps 200 (3M HP); **a forecast icon shows 30 s before any ice activates**; four map states (gone / black / outlined / blue); first ice damageable ~15 to 30 s in, two large at a time; small-ice waves at **12:30 and 4:30**; official 6.55 timers: first small activation **420 s**, reactivation **420 s**, destroyed small reappears **360 s**, destroyed large respawns **60 s**, max active **15 small / 2 large** |
 | Danshig Naadam | **1,400 rating** (5.18: 1,800→1,600; 6.4: 1,600→1,400) | Ovoos **not stealable**, claim **interruptible by any hit**; rank rises toward centre; **B/A/S = 50/100/200**, paid at 5/10/20 per 3s over a **30s** window so late claims decay; KO **+8**, death **−8** (a 16-point swing over seen deaths) |
 | Triumph | 1,400 rating | All Fields of Triumph required; 1 player per field, extra bodies don't help, **any enemy inside blocks capture**; snow ~16:00, auroras ~9:00 |
 
@@ -99,8 +99,8 @@ Community picks per job: tanks **Rampage** (Rampart on DRK/GNB) · melee **Smite
 ## Per-map playbook (compressed)
 
 - **Secure** — hold 4+ nodes in a ring; collapse to the middle on the weaponry timer; nodes (+150) are the biggest single swing; never fight near the pad edges.
-- **Seize** — win the fight at the tomelith, *then* channel; a KO adds your data and subtracts theirs, so S-ranks are worth double.
-- **Shatter** — Battle High converts directly into score; small ice at 12:30/4:30; never attack another company's large ice from the middle field (it invites the pinch) and never drop off the cliffs on the right.
+- **Seize** — be standing on the nearest tomelith for the **30-second opening spawn** (four activate together); win the fight at the tomelith, *then* channel; hold it to the end of the extraction or the value is wasted; a KO adds your data and subtracts theirs, so S-ranks are worth double.
+- **Shatter** — Battle High converts directly into score; **watch the 30-second forecast icons and pre-position on the outline**, not on the fight; small ice at 12:30/4:30; large ice is back in 60 s, so taking a small ice is the more permanent gain; never attack another company's large ice from the middle field (it invites the pinch) and never drop off the cliffs on the right.
 - **Danshig Naadam** — a race, not a defence: claimed ovoos cannot be stolen. Interrupt enemy claims with AoE. Decide as a team whether to commit to the central S-rank stalemate or farm A-ranks and stragglers while the other two bleed.
 - **Triumph** — needs 3–4 small squads covering fields simultaneously; fields are blocked by any enemy inside, so harassment works; the central gully is ranged high ground; the death ball still wins it (community consensus).
 
@@ -152,7 +152,7 @@ Named violations correct pub behaviour better than generic advice: 8/8/8 split (
 
 ## Callouts, macros and the call sheet
 
-Three companion artifacts in `sources/`:
+Three companion artifacts in the vault (`C:/ObsidianVaults/Notebook/Agents/ffxiv/guides/`):
 
 - `ffxiv-frontline-macros.md` — 27 bilingual (EN/JP) callout macros with romaji, the sound-effect convention, hotbar layout, auto-translate appendix and a JP glossary.
 - `ffxiv-frontline-call-sheet.md` — the one-page caller reference.

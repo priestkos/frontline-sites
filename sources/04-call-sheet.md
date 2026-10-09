@@ -94,8 +94,12 @@ Mass on the pivot. Contest the centre **only** as a 2-v-1 against whoever is lea
 |---|---|---|
 | Secure | weaponry timer on the HUD; teleport pads live 30s before | "PADS IN 30 — MOUNT, PADS MID" — note the pads **dismount** you |
 | Secure | node count | never drop below **4 nodes** (the 3→4 jump is 6 → 10 per tick) |
+| **Seize** | **four tomeliths activate at 0:30** | "LIS AT 30 — EVERYONE TO THE NEAREST" — be standing on it before it lights |
+| **Seize** | each lis pays for **~2 minutes**; a drained one is replaced ~**15s** later | hold it to empty, then move to the new one — abandoning a B at half is 40 points thrown away |
+| Shatter | a **30s forecast icon** before *every* activation | the outline is the real clock: pre-position on the icon, not on the fight |
 | Shatter | small ice at **12:30 and 4:30** remaining | be in position at :50 before it |
 | Shatter | big ice ~30s in | "MID BIG ICE — BODY ONLY" |
+| Shatter | large ice back in **60s**, small ice gone **6 min** | "TAKE THE SMALL — IT'S GONE FOR SIX" |
 | Triumph | snow ~**16:00** | reroute around the blocked gully crossroads *before* the fight |
 | Triumph | auroras ~**9:00** | "LB INCOMING — HOLD IT FOR THE AURA" |
 | Danshig | fewer, higher-rank ovoos late | "STOP CHASING S — TAKE THE A's" |
@@ -151,14 +155,15 @@ Mass on the pivot. Contest the centre **only** as a 2-v-1 against whoever is lea
 
 ## 10. Numbers on one line
 
-**Rating:** Secure 2,400 · Seize 2,000 data · Shatter 1,600 data · **Onsal 1,400** · Triumph 1,400.
+**Rating:** Secure 2,400 · Seize 700 data · Shatter 1,600 data · **Onsal 1,400** · Triumph 1,400.
 **Ovoo (Onsal):** B 50 / A 100 / S 200 · paid 5/10/20 per 3s over **30s** — value decays if the match ends mid-payout · KO +8, death −8 (16-point swing).
 **Battle High:** max 100 · +10% damage & healing per 20 · BH V is announced match-wide · no loss on death (7.5) · **job change zeroes it**.
 **Kill value:** 4/6/8/12/16/20 (KO) · 2/3/4/6/8/10 (assist), scaled by the victim's Battle High.
 **Limit Break:** 1st place +25% slower charge · 3rd place +25% faster.
 **Survivability:** tanks/melee −40% to −55% damage taken · ranged/casters only −25% to −35%.
 **Objective:** 72 players · 24 per team · 20 minutes · premade max 4 · 10s Invincibility on leaving the base · any hit dismounts you (uncleansable Hoofing It).
+**Objective clocks:** **Seize** — four tomeliths at **0:30**, each pays for **~2 min**, replaced **~15s** later, B/A/S **80/120/160**. **Shatter** — **30s forecast before every activation**, first ice **~15 to 30s** in, small waves at **12:30/4:30**, large ice back in **60s**, small ice gone **6 min**, max **15 small / 2 large** active.
 
 ---
 
-*Written 2026-10-05, patch 7.5 era. Re-verify thresholds and job modifiers the patch after any major PvP balance change.*
+*Written 2026-10-05, updated 2026-10-09, patch 7.5 era. Re-verify thresholds and job modifiers the patch after any major PvP balance change.*

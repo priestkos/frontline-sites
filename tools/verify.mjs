@@ -2,16 +2,44 @@
 // geometry and canvas paint coverage, captures a hero screenshot. CDP over Node's
 // global WebSocket, no dependencies.
 import { spawn } from 'node:child_process';
-import { mkdtempSync, writeFileSync } from 'node:fs';
+import {existsSync, mkdtempSync, readdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-const CHROME = process.env.CHROME_BIN || [
-  '/usr/bin/google-chrome', '/usr/bin/chromium',
-  'C:/Program Files/Google/Chrome/Application/chrome.exe',
-  'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
-].find((p) => { try { return require('node:fs').existsSync(p); } catch { return false; } }) || 'google-chrome';
+function findChrome() {
+  const direct = [
+    process.env.CHROME_BIN,
+    '/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser',
+    'C:/Program Files/Google/Chrome/Application/chrome.exe',
+    'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
+    'C:/Program Files/Microsoft/Edge/Application/msedge.exe',
+    'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
+  ].filter(Boolean);
+  for (const c of direct) if (existsSync(c)) return c;
+  // Browser download caches (puppeteer / playwright), found without hardcoding a home path.
+  const roots = [
+    process.env.USERPROFILE && join(process.env.USERPROFILE, '.cache', 'puppeteer', 'chrome'),
+    process.env.HOME && join(process.env.HOME, '.cache', 'puppeteer', 'chrome'),
+    process.env.LOCALAPPDATA && join(process.env.LOCALAPPDATA, 'ms-playwright'),
+  ].filter(Boolean);
+  const subs = [
+    'chrome-win64/chrome.exe', 'chrome-win32/chrome.exe',
+    'chrome-linux64/chrome', 'chrome-linux/chrome',
+    'chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
+  ];
+  for (const root of roots) {
+    if (!existsSync(root)) continue;
+    for (const entry of readdirSync(root)) {
+      for (const sub of subs) {
+        const p = join(root, entry, sub);
+        if (existsSync(p)) return p;
+      }
+    }
+  }
+  return 'google-chrome';
+}
+const CHROME = findChrome();
 const PORT = 9334;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const profile = mkdtempSync(join(tmpdir(), 'cdp2-'));
@@ -90,7 +118,7 @@ ws.addEventListener('message', (ev) => {
     problems.push('CONSOLE ' + m.params.args.map((a) => a.value ?? a.description).join(' '));
 });
 
-const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const REPO = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const targets = ['woodblock-codex', 'plotting-table']
   .map((d) => [pathToFileURL(join(REPO, d, 'index.html')).href, join(REPO, d, 'preview.png')]);
 for (const [url, shot] of targets) {
