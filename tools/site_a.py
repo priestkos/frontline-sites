@@ -199,6 +199,9 @@ CSS = r"""
 :root{
   --paper:#f2f1ec; --panel:#fffefb; --ink:#16181a; --muted:#5f6368; --faint:#8b8f90;
   --rule:#d6d3c9; --rule-2:#bdb9ad; --seal:#d5432a; --seal-d:#a8321f; --wash:#e7e5dc;
+  --hero-a:#fbfaf6; --hero-b:#efece2; --ink-2:#333; --on-ink:#fff; --ink-rgb:22,24,26;
+  --th-bg:#eceae1; --th-ink:#43474a; --row-hover:#faf9f4; --code-bg:#16181a; --code-ink:#eceae1;
+  --copy-bg:#2a2d31; --copy-ink:#cfcabc; --copy-bd:#3c4045; --hm1:#e4e2d9; --hm2:#c9c6b8; --hm3:#8d8a7c;
   --serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
   --sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
@@ -209,7 +212,7 @@ html{scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
   font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-::selection{background:var(--seal);color:#fff}
+::selection{background:var(--seal);color:var(--on-ink)}
 a,button{font-family:inherit}
 .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
 
@@ -221,7 +224,7 @@ a,button{font-family:inherit}
 
 /* ---------- hero ---------- */
 .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--rule);
-  background:linear-gradient(180deg,#fbfaf6,#efece2)}
+  background:linear-gradient(180deg,var(--hero-a),var(--hero-b))}
 .hero-ink{position:absolute;inset:0;width:100%;height:100%;opacity:.5}
 .seigaiha{position:absolute;left:0;right:0;bottom:0;height:120px;opacity:.5;
   background-image:radial-gradient(circle at 50% 100%,transparent 34%,var(--rule-2) 35%,transparent 37%),
@@ -235,7 +238,7 @@ a,button{font-family:inherit}
 h1.title{font-family:var(--serif);font-weight:600;font-size:clamp(48px,8.4vw,116px);
   line-height:.94;letter-spacing:-.02em;margin:26px 0 0}
 h1.title em{font-style:normal;color:var(--seal-d)}
-.lede{margin:26px 0 0;max-width:62ch;font-size:19px;color:#333}
+.lede{margin:26px 0 0;max-width:62ch;font-size:19px;color:var(--ink-2)}
 .hero-meta{display:flex;flex-wrap:wrap;gap:34px;margin-top:44px;padding-top:22px;
   border-top:1px solid var(--rule-2)}
 .hero-meta div{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;
@@ -243,14 +246,14 @@ h1.title em{font-style:normal;color:var(--seal-d)}
 .hero-meta b{display:block;font-family:var(--serif);font-size:30px;letter-spacing:0;
   text-transform:none;color:var(--ink);margin-top:6px}
 .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:40px}
-.cta-open{display:inline-flex;align-items:center;gap:12px;background:var(--ink);color:#fff;
+.cta-open{display:inline-flex;align-items:center;gap:12px;background:var(--ink);color:var(--on-ink);
   border:0;padding:15px 22px;font-size:14px;letter-spacing:.02em;cursor:pointer;
   border-radius:var(--r);text-decoration:none;transition:transform .18s,background .18s}
 .cta-open:hover{background:var(--seal-d);transform:translateY(-1px)}
 .cta-open:active{transform:translateY(0) scale(.99)}
-.cta-open i{width:26px;height:1px;background:#fff;display:block;position:relative}
+.cta-open i{width:26px;height:1px;background:var(--on-ink);display:block;position:relative}
 .cta-open i::after{content:"";position:absolute;right:0;top:-3px;width:7px;height:7px;
-  border-top:1px solid #fff;border-right:1px solid #fff;transform:rotate(45deg)}
+  border-top:1px solid var(--on-ink);border-right:1px solid var(--on-ink);transform:rotate(45deg)}
 .cta-quiet{display:inline-flex;align-items:center;gap:10px;background:none;border:0;
   border-bottom:1px solid var(--rule-2);color:var(--ink);padding:15px 2px;cursor:pointer;
   font-size:14px;text-decoration:none;transition:border-color .18s,color .18s}
@@ -327,8 +330,8 @@ main{padding:72px 0 120px;min-width:0}
 .hm-corner{text-align:left}
 .hm-name{font-size:12.6px;color:var(--ink);padding:4px 6px 4px 0;border-right:1px solid var(--rule)}
 .hm-cell{aspect-ratio:1.9/1;border-radius:1px;background:var(--wash)}
-.hm-cell.lv1{background:#e4e2d9}.hm-cell.lv2{background:#c9c6b8}
-.hm-cell.lv3{background:#8d8a7c}.hm-cell.lv4{background:var(--seal)}
+.hm-cell.lv1{background:var(--hm1)}.hm-cell.lv2{background:var(--hm2)}
+.hm-cell.lv3{background:var(--hm3)}.hm-cell.lv4{background:var(--seal)}
 .hm-cell:hover{outline:2px solid var(--ink);outline-offset:-2px}
 @media(max-width:860px){.hm{grid-template-columns:86px repeat(var(--cols),minmax(0,1fr))}}
 .ra-row{display:grid;grid-template-columns:150px 1fr 1fr;gap:16px;padding:11px 0;
@@ -358,21 +361,21 @@ main{padding:72px 0 120px;min-width:0}
 .blk-p{margin:0 0 15px;max-width:78ch}
 .blk-list{margin:0 0 16px;padding-left:22px;max-width:78ch}
 .blk-list li{margin:0 0 6px}
-.blk-list.nested{margin-top:-8px;color:#333}
+.blk-list.nested{margin-top:-8px;color:var(--ink-2)}
 .blk-q{margin:22px 0;padding:14px 20px;border-left:3px solid var(--seal);background:var(--panel);
   font-family:var(--serif);font-size:18px;max-width:74ch}
 .blk-rule{border:0;border-top:1px solid var(--rule-2);margin:32px 0}
 .tbl-wrap{overflow-x:auto;margin:0 0 22px;border:1px solid var(--rule-2);background:var(--panel)}
 table.blk-tbl{border-collapse:collapse;width:100%;font-size:14px;min-width:520px}
-.blk-tbl th{background:#eceae1;text-align:left;font-family:var(--mono);font-size:11px;
-  letter-spacing:.08em;text-transform:uppercase;color:#43474a;padding:10px 12px;
+.blk-tbl th{background:var(--th-bg);text-align:left;font-family:var(--mono);font-size:11px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--th-ink);padding:10px 12px;
   border-bottom:1px solid var(--rule-2);white-space:nowrap}
 .blk-tbl td{padding:9px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
-.blk-tbl tr:hover td{background:#faf9f4}
+.blk-tbl tr:hover td{background:var(--row-hover)}
 .code-wrap{position:relative;margin:0 0 22px}
-.blk-code{background:#16181a;color:#eceae1;padding:20px 18px;overflow-x:auto;font-family:var(--mono);
+.blk-code{background:var(--code-bg);color:var(--code-ink);padding:20px 18px;overflow-x:auto;font-family:var(--mono);
   font-size:13px;line-height:1.6;border-radius:var(--r);margin:0}
-.copy{position:absolute;top:8px;right:8px;background:#2a2d31;color:#cfcabc;border:1px solid #3c4045;
+.copy{position:absolute;top:8px;right:8px;background:var(--copy-bg);color:var(--copy-ink);border:1px solid var(--copy-bd);
   font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;padding:5px 9px;cursor:pointer;
   border-radius:var(--r)}
 .copy:hover{background:var(--seal);border-color:var(--seal);color:#fff}
@@ -392,6 +395,30 @@ footer{border-top:1px solid var(--rule-2);padding:40px 0 70px;color:var(--muted)
   .in .bar-fill{animation:none;width:var(--w)}
   .in .line-draw{animation:none;stroke-dashoffset:0}
 }
+/* ---------- theme: dark (Ink Night) ---------- */
+:root[data-theme="dark"]{
+  --paper:#121315; --panel:#1b1d20; --ink:#ecebe6; --muted:#a4a7a8; --faint:#7d8183;
+  --rule:#2c2f33; --rule-2:#44484d; --seal:#e5533a; --seal-d:#f0826d; --wash:#25282c;
+  --hero-a:#18191c; --hero-b:#0d0e10; --ink-2:#d6d5cf; --on-ink:#121315; --ink-rgb:236,235,230;
+  --th-bg:#23262a; --th-ink:#b9bcbd; --row-hover:#202326; --code-bg:#08090a; --code-ink:#e6e4dc;
+  --copy-bg:#24272b; --copy-ink:#cfcabc; --copy-bd:#3c4045; --hm1:#2a2d31; --hm2:#3d4147; --hm3:#6b6f74;
+  color-scheme:dark;
+}
+:root[data-theme="dark"] ::selection{color:#fff}
+body{transition:background-color .35s ease,color .35s ease}
+.seal-svg .k{stroke:var(--ink)}
+.seal-svg .s{stroke:var(--seal)}
+.seal-svg .d{fill:var(--seal)}
+.theme-toggle{position:fixed;top:14px;right:16px;z-index:70;display:inline-flex;align-items:center;gap:10px;
+  background:var(--panel);color:var(--ink);border:1px solid var(--rule-2);border-radius:var(--r);
+  padding:8px 12px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;
+  transition:border-color .2s,color .2s}
+.theme-toggle:hover{border-color:var(--seal);color:var(--seal-d)}
+.theme-toggle:focus-visible{outline:2px solid var(--seal);outline-offset:2px}
+.theme-toggle .sw{position:relative;width:26px;height:14px;border:1px solid currentColor;border-radius:8px;display:inline-block}
+.theme-toggle .sw::after{content:"";position:absolute;top:2px;left:2px;width:8px;height:8px;border-radius:50%;
+  background:currentColor;transition:transform .25s ease}
+:root[data-theme="dark"] .theme-toggle .sw::after{transform:translateX(12px)}
 </style>
 """
 
@@ -478,6 +505,21 @@ JS = r"""
     });
   }
 
+  /* theme switcher */
+  var tbtn=document.getElementById('themeToggle'),tlab=document.getElementById('themeLabel');
+  function applyTheme(dark){
+    if(dark){html.setAttribute('data-theme','dark');}else{html.removeAttribute('data-theme');}
+    tbtn.setAttribute('aria-pressed',dark?'true':'false');
+    tbtn.setAttribute('aria-label',dark?'Switch to light theme':'Switch to dark theme');
+    tlab.textContent=dark?'Light theme':'Dark theme';
+  }
+  applyTheme(html.getAttribute('data-theme')==='dark');
+  tbtn.addEventListener('click',function(){
+    var dark=html.getAttribute('data-theme')!=='dark';
+    applyTheme(dark);
+    try{localStorage.setItem('codex-theme',dark?'dark':'light');}catch(e){}
+  });
+
   /* ink wash canvas */
   var cv=document.getElementById('inkCanvas');
   if(cv&&!reduce){
@@ -492,7 +534,8 @@ JS = r"""
         b.x+=b.vx;b.y+=b.vy;
         if(b.x<-.2||b.x>1.2)b.vx*=-1; if(b.y<-.2||b.y>1.2)b.vy*=-1;
         var g=ctx.createRadialGradient(b.x*w,b.y*h,0,b.x*w,b.y*h,b.r);
-        g.addColorStop(0,'rgba(22,24,26,0.045)');g.addColorStop(1,'rgba(22,24,26,0)');
+        var rgb=getComputedStyle(html).getPropertyValue('--ink-rgb').trim()||'22,24,26';
+        g.addColorStop(0,'rgba('+rgb+',0.045)');g.addColorStop(1,'rgba('+rgb+',0)');
         ctx.fillStyle=g;ctx.beginPath();ctx.arc(b.x*w,b.y*h,b.r,0,6.284);ctx.fill();
       });
       requestAnimationFrame(loop);
@@ -516,13 +559,13 @@ JS = r"""
 
 SEAL_SVG = """
 <svg class="seal-svg" width="132" height="132" viewBox="0 0 132 132" aria-hidden="true">
-  <circle cx="66" cy="66" r="60" fill="none" stroke="#16181a" stroke-width="1.4"/>
-  <circle cx="66" cy="66" r="50" fill="none" stroke="#d5432a" stroke-width="1"/>
-  <path d="M40 84c10-6 16-18 18-32 3 14 9 26 19 32" fill="none" stroke="#16181a" stroke-width="2.1"/>
-  <path d="M36 62c14 4 26 4 40-2" fill="none" stroke="#16181a" stroke-width="1.6"/>
-  <path d="M58 52l8-14 8 14" fill="none" stroke="#d5432a" stroke-width="1.8"/>
-  <path d="M46 96h40" fill="none" stroke="#16181a" stroke-width="1.4"/>
-  <circle cx="66" cy="30" r="3" fill="#d5432a"/>
+  <circle cx="66" cy="66" r="60" fill="none" class="k" stroke="#16181a" stroke-width="1.4"/>
+  <circle cx="66" cy="66" r="50" fill="none" class="s" stroke="#d5432a" stroke-width="1"/>
+  <path d="M40 84c10-6 16-18 18-32 3 14 9 26 19 32" fill="none" class="k" stroke="#16181a" stroke-width="2.1"/>
+  <path d="M36 62c14 4 26 4 40-2" fill="none" class="k" stroke="#16181a" stroke-width="1.6"/>
+  <path d="M58 52l8-14 8 14" fill="none" class="s" stroke="#d5432a" stroke-width="1.8"/>
+  <path d="M46 96h40" fill="none" class="k" stroke="#16181a" stroke-width="1.4"/>
+  <circle cx="66" cy="30" r="3" class="d" fill="#d5432a"/>
 </svg>"""
 
 TOC_HTML = "".join(
@@ -539,6 +582,7 @@ PANELS_HTML = "".join(
     f'<div class="panel" id="panel-{cid}" role="tabpanel"{" hidden" if i else ""}>'
     f'<h3>{label}</h3><p>{desc}</p>{svg}</div>' for i, (cid, label, svg, desc) in enumerate(CHART_TABS))
 
+THEME_HEAD = r"""<script>try{var t=localStorage.getItem('codex-theme');if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}</script>"""
 TOTAL_BLOCKS = BLOCK_BUDGET
 HTML = f"""<!DOCTYPE html>
 <html lang="en">
@@ -548,9 +592,11 @@ HTML = f"""<!DOCTYPE html>
 <title>The Woodblock Codex | FFXIV Frontline, unabridged</title>
 <meta name="description" content="The complete FFXIV Frontline archive: mechanics, five maps, jobs, doctrine, the fourteen named plays, command and bilingual macros. Nothing summarised.">
 {CSS}
+{THEME_HEAD}
 </head>
 <body>
 <div class="progress" aria-hidden="true"></div>
+<button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to dark theme"><span class="sw" aria-hidden="true"></span><span id="themeLabel">Dark theme</span></button>
 
 <header class="hero">
   <canvas class="hero-ink" id="inkCanvas" aria-hidden="true"></canvas>
